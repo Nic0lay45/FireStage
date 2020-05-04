@@ -1,6 +1,40 @@
 from pathlib import Path
 import sys
 
+
+#================================================
+#
+#   FONCTION DE VERIFICATION
+#
+#================================================
+
+def Verif(DebutX, DebutY, Tableau1, Tableau2):
+    Trouv = True
+
+    for a in range(0 , len(Tab1)):
+        z = DebutY
+        for b in range(0 , len(Tab1[a])):
+            #print("On verifie la correspondance entre {}:{} et {}:{}".format(a,b,DebutX,z))
+            if Tableau1[a][b] != Tableau2[DebutX][z]:
+                Trouv = False
+                break
+            z += 1
+        DebutX += 1
+
+    return Trouv
+
+
+
+
+
+
+
+#=============================================================================================
+#
+#         MAIN PROGRAM
+#
+#=============================================================================================
+
 print("Fichiers stockés dans le folder ../Rectangle/")
 print("")
 
@@ -46,4 +80,22 @@ for x in range(0 , len(Tab2)):
     Tab2[x] = list(Tab2[x])
 
 
+#....Le premier caractère a rechercher est en position 0,0 du premier fichier
+PCaract = Tab1[0][0]
+HauteurTab = len(Tab1)
+LongueurTab = len(Tab1[0]) 
 
+#....On balaye le tableau 2 pour chercher ce premier caractère
+for x in range(0 , len(Tab2)):
+    for z in range(0 , len(Tab2[x])):
+        if Tab2[x][z] == PCaract:
+            print("Position trouvée ! {}:{}".format(x,z))
+            if ((x + LongueurTab) <= len(Tab2)) and ((z + HauteurTab) <= len(Tab2[0])):
+                print("Lancement de la recherche.....")
+                if Verif(x,z,Tab1,Tab2):
+                    print("Trouvé ! Position {},{} validée !".format(z,x))
+                    break
+                else:
+                    print("Mauvaise position : Caractère qui ne correspond pas")
+            else:
+                print("Mauvaise position : Pas assez de place...")
