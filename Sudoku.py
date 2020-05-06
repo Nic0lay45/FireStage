@@ -66,6 +66,8 @@ def TraitLigne(l):
                 print("Valeur non trouvée : {}".format(x))
                 l["".join(l).index("_")] = str(x)
                 break
+    elif "".join(l).count("_") == 0:
+        print("Pas d'inconnue, ligne complète...")
     else:
         print("Plusieurs inconnues, next...")
 
@@ -105,6 +107,10 @@ print(GrilleOrigine)
 
 GrilleOrigine = Explose(GrilleOrigine)
 
+print("")
+print("*-------------------------------------------------------*")
+print("")
+
 print("On commence par traiter ligne par ligne...")
 
 for x in range(0 , len(GrilleOrigine)):
@@ -113,6 +119,30 @@ for x in range(0 , len(GrilleOrigine)):
 
 print("Traitement des lignes terminé")
 
-GrilleOrigine = Restruct(GrilleOrigine)
+print("")
+print("*-------------------------------------------------------*")
+print("")
 
+print("Ensuite on traite colonne par colonne...")
+print("Pour économiser une fonction différente, on transforme la colonne en ligne, pour utiliser la fonction précédente :) ")
+for col in range(0 , 9):
+    print("Traitement de la colonne {}".format(col))
+    Colonne = []
+    for x in range(0 , 9):
+        Colonne.append(GrilleOrigine[x][col])
+
+    Colonne = TraitLigne(Colonne)
+
+    for x in range(0 , 9):
+        GrilleOrigine[x][col] = Colonne[x]
+
+
+print("")
+print("*-------------------------------------------------------*")
+print("*         EPREUVE DU FEU - SUDOKU STEP1 TERMINE !       *")
+print("*-------------------------------------------------------*")
+print("")
+
+
+GrilleOrigine = Restruct(GrilleOrigine)
 print(GrilleOrigine)
